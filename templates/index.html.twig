@@ -1,0 +1,52 @@
+  {% include('base.html.twig')%}
+
+  <div class="container">
+ 
+{{ form_start(form) }} 
+      {{ form_row(form.search) }} 
+     {{ form_row(form.button ) }} 
+    
+{{ form_end(form) }}
+ 
+<table class="table" id="table_starwars"> 
+  <thead>
+    <tr>
+      <th >id</th>      
+      <th >avatar</th>
+      <th >name</th>
+      <th >mass</th>
+      <th >height</th>
+      <th >gender</th>
+      <th >options</th>
+    </tr>
+  </thead>
+   <tbody>
+   {% if char is empty %}
+   <tr> <td>  <div class="alert alert-warning">No characters found !!</div> </td></tr>
+   {% else %}
+{% for c in char %} 
+<form action="{{  path('character', {id: c.id}) }}" method="GET">
+    <tr> 
+      <td>{{ c.id }}</td> 
+      {% if c.picture is not null %}     
+      <td><img src="{{ c.picture }}" alt="avatar" style="width:50px;height:50px;background-color:#333;"></td>
+      {% else %}      
+      <td><div class="placeholder" style="width:50px;height:50px;background-color:#333;"></td>
+      {% endif %}
+      <td>{{ c.name }}</td>
+      <td>{{ c.mass }}</td>
+      <td>{{ c.height }}</td>
+      <td>{{ c.gender }}</td>
+      <td> 
+      <input class="btn btn-info"type="submit" value="Modifier">
+      <a class="btn btn-danger" href="{{ path('delete', {id: c.id})}}" > Supprimer </a> 
+      </td>
+
+    </tr>
+</form>
+{% endfor %}
+{% endif %}
+  </tbody>
+</table>
+ </div>
+ 

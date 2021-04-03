@@ -1,0 +1,20 @@
+ 
+ {% include('base.html.twig')%}
+
+ <div class="container"> 
+<table class="table table-borderless" id="movies">  
+    <tr> <td><strong>  Title </strong></td> <td>{{ movie.name }}</td></tr>
+    <tr> <td><strong>  Number of episodes </strong></td> <td>{{ movie.episode }}</td></tr>
+    <tr> <td><strong>  Summary </strong></td> <td>{{ movie.opening }}</td></tr>
+    <tr> <td><strong>  Director </strong></td> <td>{{ movie.director }}</td></tr>
+    <tr> <td><strong>  Producer</strong></td> <td>{{ movie.producer }}</td></tr>
+    <tr> <td><strong>  Relase Date</strong></td> <td>{{ movie.releaseDate }}</td></tr> 
+    <tr> <td><strong>  List of characters </strong></td> <td>
+     {% for char in movie.getCharacters %} 
+            <a class="btn btn-info" href="{{ path('character', {id:char.id})}}">{{ char.name }}</a> 
+     {% endfor %}
+     </td></tr>
+  </tbody>
+</table>
+ 
+</div>

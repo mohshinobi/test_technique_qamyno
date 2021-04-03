@@ -1,0 +1,59 @@
+ 
+ {% include('base.html.twig')%}
+
+ <div class="container">
+{{ form_start(form)}}
+<table class="table table-borderless" id="table_starwars">  
+    <tr> 
+       <td>{{ form_row(form.name)  }}</td>
+    </tr>
+    <tr>{{ form_errors(form.name) }}</tr>
+
+    <tr> 
+       <td>{{ form_row(form.mass)  }}</td>
+    </tr>
+    <tr>{{ form_errors(form.mass) }}</tr>
+
+    <tr> 
+      <td>{{ form_row(form.height)  }}</td>
+    </tr>
+    <tr>{{ form_errors(form.height) }}</tr>
+    <tr> 
+      <td>{{ form_row(form.gender) }}</td>
+    </tr>
+    <tr>{{ form_errors(form.gender) }}</tr>
+   <tr> <td>Movies : 
+    {% for movie in char.getMovies()%}    
+    <a href="{{ path('show_movie' , {id:movie.id})}}" class="badge badge-pill badge-primary">{{ movie.name}}</a> 
+    {% endfor %} 
+    </tr> 
+    </td>
+ 
+    {# avatar #}
+    {% if char.picture is not null %}
+    <tr> 
+      <td> <img src="{{ char.picture }}" style="width:100px;height:100px;" alt="avatar"> 
+      </td>
+    </tr>
+    {% else %}
+    <tr> 
+      <td><div style="width:100px;height:100px;background-color:gold;"></div></td>
+    </tr>
+    {% endif %}
+    <tr>     
+      <td>{{ form_row(form.picture ) }}</td>
+    </tr>
+    <tr>{{ form_errors(form.picture) }}</tr>
+    <tr> 
+       <td> 
+       <a class="btn btn-info" href="{{ path('search')}}" > Retour </a> 
+       <a class="btn btn-danger" href="{{ path('delete', {id: char.id})}}" > Supprimer </a> 
+       {{ form_row(form.submit) }}
+      </td> 
+    </tr>
+
+  </tbody>
+</table>
+
+{{ form_end(form)}}
+</div>
